@@ -3,26 +3,37 @@
 <head>
   <meta charset="utf-8">
   <title>Kontoportal – Verifiering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: sans-serif; max-width: 400px; margin: 40px auto; }
-    .card { border: 1px solid #ccc; padding: 20px; border-radius: 6px; }
-    label { display: block; margin-top: 10px; }
-    input { width: 100%; padding: 8px; margin-top: 4px; }
-    button { margin-top: 15px; padding: 10px; width: 100%; cursor: pointer; }
-    .hint { margin-top: 15px; font-size: 0.85rem; color: #666; }
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+           max-width: 420px; margin: 48px auto; padding: 0 16px; line-height: 1.5; }
+    .card { border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #fff; }
+    h2 { margin-top: 0; }
+    label { display: block; margin-top: 12px; font-weight: 600; }
+    input { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #bbb; border-radius: 6px; }
+    button { margin-top: 16px; padding: 12px; width: 100%; cursor: pointer; border: 0;
+             border-radius: 6px; background: #0b72e7; color: #fff; font-weight: 600; }
+    .hint { margin-top: 16px; font-size: 0.9rem; color: #555; }
+    @media (prefers-color-scheme: dark) {
+      body { background:#111; color:#eee; }
+      .card { background:#1b1b1b; border-color:#333; }
+      input { background:#111; color:#eee; border-color:#444; }
+      .hint { color:#aaa; }
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>Verifiera dina uppgifter</h2>
-    <form id="loginForm">
+    <form id="loginForm" novalidate>
       <label>
         Användarnamn
-        <input type="text" id="username" required>
+        <input type="text" id="username" autocomplete="username" required>
       </label>
       <label>
         Lösenord
-        <input type="password" id="password" required>
+        <input type="password" id="password" autocomplete="current-password" required>
       </label>
       <button type="submit">Fortsätt</button>
     </form>
@@ -34,16 +45,14 @@
   <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
-
-      const user = document.getElementById('username').value;
+      const user = document.getElementById('username').value.trim();
       const pass = document.getElementById('password').value;
-
       alert(
         "UTBILDNINGSSIDA\n\n" +
         "Du skrev in:\n" +
-        "Användarnamn: " + user + "\n" +
+        "Användarnamn: " + (user || "(tomt)") + "\n" +
         "Lösenord: " + (pass ? "(du fyllde i något)" : "(tomt)") +
-        "\n\nInga uppgifter sparas."
+        "\n\nInga uppgifter sparas eller skickas."
       );
     });
   </script>
