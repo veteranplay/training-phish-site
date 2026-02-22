@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>Kontoportal – Verifiering</title>
+  <style>
+    body { font-family: sans-serif; max-width: 400px; margin: 40px auto; }
+    .card { border: 1px solid #ccc; padding: 20px; border-radius: 6px; }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 8px; margin-top: 4px; }
+    button { margin-top: 15px; padding: 10px; width: 100%; cursor: pointer; }
+    .hint { margin-top: 15px; font-size: 0.85rem; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Verifiera dina uppgifter</h2>
+    <form id="loginForm">
+      <label>
+        Användarnamn
+        <input type="text" id="username" required>
+      </label>
+      <label>
+        Lösenord
+        <input type="password" id="password" required>
+      </label>
+      <button type="submit">Fortsätt</button>
+    </form>
+    <p class="hint">
+      Detta är en utbildningssida. Inga uppgifter sparas.
+    </p>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      alert(
+        "UTBILDNINGSSIDA\n\n" +
+        "Du skrev in:\n" +
+        "Användarnamn: " + user + "\n" +
+        "Lösenord: " + (pass ? "(du fyllde i något)" : "(tomt)") +
+        "\n\nInga uppgifter sparas."
+      );
+    });
+  </script>
+</body>
+</html>
